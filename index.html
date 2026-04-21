@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Horticulture and Research Digital Resource and Tool Index</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f7f7f7; }
+    h1 { text-align: center; }
+    #search { width: 100%; padding: 10px; margin-bottom: 20px; font-size: 16px; }
+    .resource { background: white; padding: 15px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .title { font-size: 20px; font-weight: bold; }
+    .section { margin-top: 8px; }
+    .label { font-weight: bold; }
+    a { color: #0077cc; }
+  </style>
+</head>
+<body>
+  <h1>Horticulture and Research Digital Resource and Tool Index</h1>
+ 
+  <input type="text" id="search" placeholder="Search resources..." />
+ 
+  <div id="resourceList"></div>
+ 
+  <script>
+    const resources = [
+      {
+        title: "ArcGIS Online",
+        summary: "A web-based tool for creating and managing maps, data collection tools, and more.",
+        contacts: "IT, Scientific Data Manager, Assistant Manager of Plant Records",
+        links: [
+          { label: "DBG ArcGIS Online", url: "https://researchdbg.maps.arcgis.com/" }
+        ],
+        info: "Requires paid account. Managed and maintained by IT."
+      },
+            {
+        title: "SEINet",
+        summary: "An online database for preserved plant voucher specimens. Used by KHD herbarium as data management system. Contains 24+ million records from 450+ herbaria.",
+        contacts: "Collecitons Assistant, Scientific Data Manager",
+        links: [
+          { label: "SEINet", url: "https://swbiodiversity.org/" }
+        ],
+        info: "No account required for searching and data discovery. Available for free use by all."
+      },
+                  {
+        title: "Global Biodiversity Information Facility (GBIF)",
+        summary: "An online database for all types of specimen or observation based occurrence data. Global scope. Over 3 billion records.",
+        contacts: "Scientific Data Manager, Collecitons Assistant",
+        links: [
+          { label: "GBIF", url: "https://gbif.org/" }
+        ],
+        info: "No account required for searching and data discovery. Free account required for data download. Data in Darwin Core. Available for free use by all."
+      },            {
+        title: "World Flora Online",
+        summary: "Online taxonomic project to create a comprehensive list of the world's species of vascular plants and mosses. Global scope.",
+        contacts: "Scientific Data Manager, Assistant Manager of Plant Records",
+        links: [
+          { label: "World Flora Online", url: "https://worldfloraonline.org/" }
+        ],
+        info: "This is the taxonomic backbone used by BGCI. No API, but full dataset can be downloaded as TSV - Scientific Data Manager has imported into a MySQL relational db."
+      },            {
+        title: "Global Names Verifier",
+        summary: "Tool to verify lists of scientific names against biodiversity data sources. Great for spell checking, conforming to specified taxonomy data source, synonymy checking.",
+        contacts: "Scientific Data Manager, Assistant Manager of Plant Records",
+        links: [
+          { label: "Global Names Verifier", url: "https://resolver.globalnames.org/" }
+        ],
+        info: "Click Advanced Options to specify which resource(s) you want to compare against. Results can be returned in CSV, HTML, JSON, or TSV. API available."
+      },            {
+        title: "Global Names Finder",
+        summary: "Tool to identify and list all scientific names found in a document.",
+        contacts: "Scientific Data Manager",
+        links: [
+          { label: "Global Names Finder", url: "https://finder.globalnames.org/" }
+        ],
+        info: "Can upload a PDF, point to a web page, or paste text."
+      },            {
+        title: "Global Names Parser",
+        summary: "Tool to parse scientific names (breaks them into components).",
+        contacts: "Scientific Data Manager",
+        links: [
+          { label: "Global Names Parser", url: "https://parser.globalnames.org/" }
+        ],
+        info: "Great for stripping out author names."
+      },            {
+        title: "onX Hunting App",
+        summary: "Hunting app that can be used to determine land ownserhip.",
+        contacts: "Horticulture Greenhouse Production Coordinator",
+        links: [
+          { label: "onX", url: "https://www.onxmaps.com/" }
+        ],
+        info: "Requires paid subscription."
+      },
+      ,            {
+        title: "Plants of the World Online (POWO)",
+        summary: "Kew Gardens' online database of gloabl plant names.",
+        contacts: "",
+        links: [
+          { label: "POWO", url: "https://powo.science.kew.org/" }
+        ],
+        info: ""
+      },
+        {
+        title: "NetX DAM",
+        summary: "Denver Botanic Gardens' Digital Asset Management System. A searchable online respoitory for all images created and owned by the institution.",
+        contacts: "Scientific Data Manager",
+        links: [
+          { label: "NetX DAM", url: "https://botanicgardens.netx.net/" },
+          { label: "NetX DAM Guide", url: "https://botanicgardens.netx.net/portals/dam-guide/" },
+
+        ],
+        info: "Sign in with DBG username and pw. Use keywords for searching. Great collaboration tools. Read-write account available by request."
+      },
+              {
+        title: "Colorado's Conservation Data Explorer (CODEX)",
+        summary: "CODEX is a web-based interactive map viewer that includes a set of tools to support conservation planning, environmental review, evaluation of conservation portfolios, education, and more.",
+        contacts: "Manager of Conservation Programs",
+        links: [
+          { label: "CODEX", url: "https://cnhp.colostate.edu/" },
+
+        ],
+        info: ""
+      },
+                    {
+        title: "MyCoPortal",
+        summary: "An online database for preserved fungal voucher specimens. Used by Sam Mitchel herbarium of fungi as data management system.",
+        contacts: "Collections Assistant, Associate Curator of Mycology, Scientific Data Manager",
+        links: [
+          { label: "MyCoPortal", url: "https://mycoportal.org/" },
+
+        ],
+        info: "No account required for searching and data discovery. Available for free use by all."
+      },
+                          {
+        title: "iNaturalist",
+        summary: "A community science platform for recording observations of organisms.",
+        contacts: "Floristics and Outreach Coordinator, Scientific Data Manager",
+        links: [
+          { label: "iNaturalist", url: "https://inaturalist.org/" },
+
+        ],
+        info: "Mobile app available. No account required for searching and data discovery. Account required for recording observations and adding indentificaitons. API available."
+      },
+                          {
+        title: "GBIF Species Name Matcher",
+        summary: "A tool that helps you match a list of scientific names and normalize them against the GBIF taxonomic backbone.",
+        contacts: "Scientific Data Manager",
+        links: [
+          { label: "GBIF Names Matcher", url: "https://www.gbif.org/tools/species-lookup" },
+
+        ],
+        info: "User uploads csv containing scientific names. Useful when needing to conform to GBIF accepted scientific names"
+      },
+                                {
+        title: "Global Genome Biodiversity Network (GGBN)",
+        summary: "A platform to share information about genomic samples and request material sample transfers.",
+        contacts: "Scientific Data Manager",
+        links: [
+          { label: "GGBN", url: "https://www.ggbn.org" },
+
+        ],
+        info: ""
+      },
+                                      {
+        title: "BGCI PlantSearch",
+        summary: "Plant Search is a database of living plant, seed, pollen, and tissue collecitons from Botanical Gardens across the world.",
+        contacts: "Assistant Manager of Plant Records, Scientific Data Manager",
+        links: [
+          { label: "PlantSearch", url: "https://plantsearch.bgci.org/" },
+
+        ],
+        info: ""
+      },
+                                            {
+        title: "North American Alpine Plant Conservation Atlas",
+        summary: "A searchable database of vascular plants documented in the alpine ecosystems of North America.",
+        contacts: "Assistant Manager of Plant Records, Scientific Data Manager",
+        links: [
+          { label: "North American Alpine Plant Conservation Atlas", url: "https://naalpineplants.botanicgardens.org/" },
+
+        ],
+        info: "Managed and maintaind by Denver Botanic Gardens. Data can be downloaded as csv. Conforms to World Flora Online taxonomic backbone."
+      },
+                                                  {
+        title: "GEOLocate",
+        summary: "Tool for georeferencing.",
+        contacts: "Collections Assitant, Scientific Data Manager",
+        links: [
+          { label: "GEOLocate", url: "https://www.geo-locate.org/" },
+
+        ],
+        info: "Click Web Application at the top of the page - then select Standard CLient or Batch Client (if you need to import a csv of locations)."
+      },
+      
+    ];
+ 
+    const listEl = document.getElementById("resourceList");
+    const searchEl = document.getElementById("search");
+ 
+    function renderList(filter = "") {
+      listEl.innerHTML = "";
+ 
+      const filtered = resources.filter(r => {
+        const text = `${r.title} ${r.summary} ${r.contacts} ${r.tips}`.toLowerCase();
+        return text.includes(filter.toLowerCase());
+      });
+ 
+      filtered.forEach(r => {
+        const div = document.createElement("div");
+        div.className = "resource";
+ 
+        div.innerHTML = `
+          <div class="title">${r.title}</div>
+          <div class="section"><span class="label">Summary:</span> ${r.summary}</div>
+          <div class="section"><span class="label">People that can help:</span> ${r.contacts}</div>
+          <div class="section"><span class="label">Links:</span> ${r.links.map(l => `<a href="${l.url}" target="_blank">${l.label}</a>`).join(", ")}</div>
+          <div class="section"><span class="label">Info:</span> ${r.info}</div>
+        `;
+ 
+        listEl.appendChild(div);
+      });
+    }
+ 
+    searchEl.addEventListener("input", (e) => {
+      renderList(e.target.value);
+    });
+ 
+    renderList();
+  </script>
+</body>
+</html>
